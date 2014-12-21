@@ -89,7 +89,7 @@ namespace UNBGradeScraper_v2
             {
                 var doc = new HtmlDocument();
                 doc.Load(stream);
-                if (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
+                while (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
                 {
                     doc = Login(response.Cookies["JSESSIONID"], doc.DocumentNode.SelectNodes("//input[@type=\"hidden\"]"), doc.DocumentNode.SelectNodes("//input[@type=\"submit\"]"));
                 }
