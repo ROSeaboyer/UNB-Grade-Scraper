@@ -4,7 +4,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
-using Microsoft.Win32;
 
 namespace UNBGradeScraper_v2
 {
@@ -13,7 +12,6 @@ namespace UNBGradeScraper_v2
         static string username = "", password = "";
         static void Main(string[] args)
         {
-            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
             int currentCount, previousCount = 0, randTime;
             DateTime newTime;
             Random rand = new Random();
@@ -57,14 +55,6 @@ namespace UNBGradeScraper_v2
             }
             Console.WriteLine("Check complete. Press any key to exit...");
             Console.ReadKey();
-        }
-
-        static void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
-        {
-            if (e.Mode != PowerModes.StatusChange)
-            {
-                Console.WriteLine("Computer entered " + e.Mode + " at " + DateTime.Now.ToString("t"));
-            }
         }
 
         static void checkUsername()
