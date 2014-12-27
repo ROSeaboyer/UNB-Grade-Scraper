@@ -39,7 +39,7 @@ namespace UNBGradeScraper_v2
                 }
                 if (currentCount < previousCount || currentCount == 0)
                 {
-                    if (System.Environment.OSVersion.Platform != PlatformID.MacOSX || System.Environment.OSVersion.Platform != PlatformID.Unix || (int)System.Environment.OSVersion.Platform != 128)
+                    if (System.Environment.OSVersion.Platform != PlatformID.MacOSX && System.Environment.OSVersion.Platform != PlatformID.Unix && (int)System.Environment.OSVersion.Platform != 128)
                         FlashWindow.Flash(FindWindow.FindWindowByCaption(IntPtr.Zero, Console.Title));
                     if (currentCount == 0)
                     {
