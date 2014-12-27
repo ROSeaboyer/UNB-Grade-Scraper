@@ -9,13 +9,16 @@ namespace UNBGradeScraper_v2
 {
     class Program
     {
-        static string username = "", password = "";
+		static Student student;
         static void Main(string[] args)
         {
             int currentCount, previousCount = 0, randTime;
             DateTime newTime;
             Random rand = new Random();
             Console.Title = "Grade Scraper";
+
+			student = Student.GetStudent ();
+
             while (true)
             {
                 var document = getMarksPage();
@@ -39,8 +42,8 @@ namespace UNBGradeScraper_v2
                 }
                 if (currentCount < previousCount || currentCount == 0)
                 {
-                    if (System.Environment.OSVersion.Platform != PlatformID.MacOSX || System.Environment.OSVersion.Platform != PlatformID.Unix || (int)System.Environment.OSVersion.Platform != 128)
-                        FlashWindow.Flash(FindWindow.FindWindowByCaption(IntPtr.Zero, Console.Title));
+					if (System.Environment.OSVersion.Platform != PlatformID.MacOSX && System.Environment.OSVersion.Platform != PlatformID.Unix && (int)System.Environment.OSVersion.Platform != 128)
+						FlashWindow.Flash(FindWindow.FindWindowByCaption(IntPtr.Zero, Console.Title));
                     if (currentCount == 0)
                     {
                         break;
@@ -53,20 +56,9 @@ namespace UNBGradeScraper_v2
                 Console.WriteLine("Next check is at " + newTime.ToString("t") + " (" + randTime + " minutes)");
                 Thread.Sleep(randTime * 60000);
             }
+
             Console.WriteLine("Check complete. Press any key to exit...");
             Console.ReadKey();
-        }
-
-        static void checkUsername()
-        {
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                Console.Write("Please enter your username: ");
-                username = Console.ReadLine();
-                Console.Write("Please enter your password: ");
-                password = getPassword();
-                Console.WriteLine();
-            }
         }
 
         static HtmlDocument getMarksPage()
@@ -101,9 +93,8 @@ namespace UNBGradeScraper_v2
             {
                 postData.Append(node.GetAttributeValue("name", "") + "=" + node.GetAttributeValue("value", "") + "&");
             }
-            checkUsername();
-            postData.Append("username=" + username);
-            postData.Append("&password=" + password);
+			postData.Append("username=" + student.username);
+			postData.Append("&password=" + student.password);
             foreach (HtmlNode node in submit)
             {
                 postData.Append("&" + node.GetAttributeValue("name", "") + "=" + node.GetAttributeValue("value", "").Replace(" ", "+"));
@@ -123,7 +114,7 @@ namespace UNBGradeScraper_v2
             return loginDoc;
         }
 
-        static string getPassword()
+		public static string getPassword()
         {
             StringBuilder pwd = new StringBuilder();
             ConsoleKeyInfo i;
