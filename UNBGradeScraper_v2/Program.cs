@@ -17,17 +17,25 @@ namespace UNBGradeScraper_v2
             Random rand = new Random();
             Console.Title = "Grade Scraper";
 
+			//TODO:Add support for multiple students
 			student = Student.GetStudent ();
 
             while (true)
             {
+				//TODO:Split into multiple stages
 				var document = HTMLPageProcessor.getMarksPage(student);
+
+
                 var courseTags = document.DocumentNode.SelectNodes("//li/a/strong");
                 var markTags = document.DocumentNode.SelectNodes("//li/a/span/strong");
                 currentCount = 0;
+
+				//TODO:Separate into new method
                 for (int i = 0; i < courseTags.Count; i++)
                 {
                     if (courseTags[i].InnerText.Contains("COOP")) continue;
+
+
                     Console.Write(courseTags[i].InnerText.Substring(0, courseTags[i].InnerText.LastIndexOf("*")).Replace("*", " "));
                     Console.Write(":\t");
                     if (string.IsNullOrWhiteSpace(markTags[i].InnerText))
