@@ -9,6 +9,30 @@ namespace UNBGradeScraper_v2
 {
 	public class HTMLPageProcessor
 	{
+		public static Stream GetMarksStream()
+		{
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://es.unb.ca/apps/mobile/grades/");
+			request.Method = "GET";
+			request.CookieContainer = new CookieContainer();
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			return response.GetResponseStream ();
+		}
+
+		/*
+		public static Stream ApplyLogin(Stream stream, Student student)
+		{
+			using (stream)
+			{
+				var doc = new HtmlDocument();
+				doc.Load(stream);
+				while (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
+				{
+					doc = Login(response.Cookies["JSESSIONID"], doc.DocumentNode.SelectNodes("//input[@type=\"hidden\"]"), doc.DocumentNode.SelectNodes("//input[@type=\"submit\"]"), student);
+				}
+				return doc;
+			}
+		}*/
+
 		public static HtmlDocument getMarksPage(Student student)
 		{
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://es.unb.ca/apps/mobile/grades/");
