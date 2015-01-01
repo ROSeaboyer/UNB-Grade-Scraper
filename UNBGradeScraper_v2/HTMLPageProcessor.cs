@@ -3,54 +3,45 @@ using System.Net;
 using System.IO;
 using System.Text;
 
+using StudentManager;
+
 using HtmlAgilityPack;
 
 namespace UNBGradeScraper_v2
 {
 	public class HTMLPageProcessor
 	{
-		public static Stream GetMarksStream()
+		public static HttpWebResponse GetMarksWebResponse()
 		{
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://es.unb.ca/apps/mobile/grades/");
 			request.Method = "GET";
 			request.CookieContainer = new CookieContainer();
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			return response.GetResponseStream ();
+			return (HttpWebResponse)request.GetResponse();
 		}
 
-		/*
-		public static Stream ApplyLogin(Stream stream, Student student)
+		public static Cookie GetSessionId(HttpWebResponse response)
 		{
+			return response.Cookies ["JSESSIONID"];
+		}
+
+		public static HtmlDocument LoginAsStudent(Stream stream, Cookie sessionId, Student student)
+		{
+			var doc = new HtmlDocument();
+
 			using (stream)
 			{
-				var doc = new HtmlDocument();
-				doc.Load(stream);
-				while (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
-				{
-					doc = Login(response.Cookies["JSESSIONID"], doc.DocumentNode.SelectNodes("//input[@type=\"hidden\"]"), doc.DocumentNode.SelectNodes("//input[@type=\"submit\"]"), student);
-				}
-				return doc;
-			}
-		}*/
 
-		public static HtmlDocument getMarksPage(Student student)
-		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://es.unb.ca/apps/mobile/grades/");
-			request.Method = "GET";
-			request.CookieContainer = new CookieContainer();
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			using (Stream stream = response.GetResponseStream())
-			{
-				var doc = new HtmlDocument();
 				doc.Load(stream);
 				while (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
 				{
-					doc = Login(response.Cookies["JSESSIONID"], doc.DocumentNode.SelectNodes("//input[@type=\"hidden\"]"), doc.DocumentNode.SelectNodes("//input[@type=\"submit\"]"), student);
+					doc = Login(sessionId, doc.DocumentNode.SelectNodes("//input[@type=\"hidden\"]"), doc.DocumentNode.SelectNodes("//input[@type=\"submit\"]"), student);
 				}
-				return doc;
+
 			}
+
+			return doc;
 		}
-
+	
 		public static HtmlDocument Login(Cookie jSessionID, HtmlNodeCollection hidden, HtmlNodeCollection submit, Student student)
 		{
 			HtmlDocument loginDoc = new HtmlDocument();
