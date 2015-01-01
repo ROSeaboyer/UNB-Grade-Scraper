@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace UNBGradeScraper_v2
+namespace StudentManager
 {
 	public class Student
 	{
