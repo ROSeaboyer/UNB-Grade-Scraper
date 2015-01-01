@@ -8,7 +8,7 @@ namespace StudentManager
 {
 	class MainClass
 	{
-		public const string STUDENT_FILE = "student.xml";
+		public const string STUDENT_FILE = "students.xml";
 
 		public static XDocument studentInfo;
 

@@ -30,7 +30,6 @@ namespace UNBGradeScraper_v2
 
 			using (stream)
 			{
-
 				doc.Load(stream);
 				while (doc.DocumentNode.SelectSingleNode("//title").InnerText.Contains("Secure Services Login"))
 				{

@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Text;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Linq;
+
 
 namespace StudentManager
 {
@@ -8,13 +13,7 @@ namespace StudentManager
 		public string username { get; private set; }
 		public string password { get; private set; }
 
-		public Student (string username, string password)
-		{
-			this.username = username;
-			this.password = password;
-		}
-
-		public static Student GetStudent()
+		public Student()
 		{
 			string username;
 			string password;
@@ -25,7 +24,30 @@ namespace StudentManager
 			password = getPassword();
 			Console.WriteLine();
 
-			return new Student (username, password);
+			this.username = username;
+			this.password = password;
+		}
+
+		public Student (string username, string password)
+		{
+			this.username = username;
+			this.password = password;
+		}
+
+		public static Student GetStudent()
+		{
+			XDocument doc;
+			if (File.Exists (MainClass.STUDENT_FILE)) {
+				doc = XDocument.Load (MainClass.STUDENT_FILE);
+			} else {
+				return new Student ();
+			}
+
+			var stu = (from student in doc.Descendants ("student")
+				where student.Element ("username").Value == "dschroer"
+				select new Student(student.Element("username").Value,student.Element("password").Value)).FirstOrDefault ();
+
+			return stu;
 		}
 
 		private static string getPassword()
