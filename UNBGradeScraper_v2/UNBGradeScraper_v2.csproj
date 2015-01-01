@@ -48,7 +48,6 @@
     <Compile Include="FlashWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student.cs" />
     <Compile Include="HTMLPageProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,4 +62,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\UserManager\StudentManager.csproj">
+      <Project>{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}</Project>
+      <Name>StudentManager</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

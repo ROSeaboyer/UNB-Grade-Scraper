@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNBGradeScraper_v2", "UNBGradeScraper_v2\UNBGradeScraper_v2.csproj", "{8B76860F-6188-4A5A-8B74-319CBB7BD162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManager", "UserManager\StudentManager.csproj", "{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,13 @@ Global
 		{8B76860F-6188-4A5A-8B74-319CBB7BD162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B76860F-6188-4A5A-8B74-319CBB7BD162}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B76860F-6188-4A5A-8B74-319CBB7BD162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69F4BE6-C8F3-4CCD-89B2-CE9357CE8BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = UNBGradeScraper_v2\UNBGradeScraper_v2.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
