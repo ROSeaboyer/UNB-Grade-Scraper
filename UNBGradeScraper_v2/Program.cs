@@ -23,9 +23,9 @@ namespace UNBGradeScraper_v2
 
             while (true)
             {
-				var response = HTMLPageProcessor.GetMarksWebResponse ();
-				var sessionId = HTMLPageProcessor.GetSessionId (response);
-				var document = HTMLPageProcessor.LoginAsStudent (response.GetResponseStream (), sessionId, student);
+				var response = UNBPageProcessor.GetMarksWebResponse ();
+				var sessionId = UNBPageProcessor.GetSessionId (response);
+				var document = UNBPageProcessor.LoginAsStudent (response.GetResponseStream (), sessionId, student);
 
                 var courseTags = document.DocumentNode.SelectNodes("//li/a/strong");
                 var markTags = document.DocumentNode.SelectNodes("//li/a/span/strong");

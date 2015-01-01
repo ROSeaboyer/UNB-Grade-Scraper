@@ -9,7 +9,7 @@ using HtmlAgilityPack;
 
 namespace UNBGradeScraper_v2
 {
-	public class HTMLPageProcessor
+	public class UNBPageProcessor
 	{
 		public static HttpWebResponse GetMarksWebResponse()
 		{
