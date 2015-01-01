@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace UNBGradeScraper_v2
 {
@@ -21,10 +22,38 @@ namespace UNBGradeScraper_v2
 			Console.Write("Please enter your username: ");
 			username = Console.ReadLine();
 			Console.Write("Please enter your password: ");
-			password = Program.getPassword();
+			password = getPassword();
 			Console.WriteLine();
 
 			return new Student (username, password);
+		}
+
+		private static string getPassword()
+		{
+			StringBuilder pwd = new StringBuilder();
+			ConsoleKeyInfo i;
+			while (true)
+			{
+				i = Console.ReadKey(true);
+				if (i.Key == ConsoleKey.Enter)
+				{
+					break;
+				}
+				else if (i.Key == ConsoleKey.Backspace)
+				{
+					if (pwd.Length > 0)
+					{
+						pwd.Remove(pwd.Length - 1, 1);
+						Console.Write("\b \b");
+					}
+				}
+				else
+				{
+					pwd.Append(i.KeyChar);
+					Console.Write("*");
+				}
+			}
+			return pwd.ToString();
 		}
 	}
 }

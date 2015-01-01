@@ -68,35 +68,5 @@ namespace UNBGradeScraper_v2
             Console.WriteLine("Check complete. Press any key to exit...");
             Console.ReadKey();
         }
-
-        
-
-		public static string getPassword()
-        {
-            StringBuilder pwd = new StringBuilder();
-            ConsoleKeyInfo i;
-            while (true)
-            {
-                i = Console.ReadKey(true);
-                if (i.Key == ConsoleKey.Enter)
-                {
-                    break;
-                }
-                else if (i.Key == ConsoleKey.Backspace)
-                {
-                    if (pwd.Length > 0)
-                    {
-                        pwd.Remove(pwd.Length - 1, 1);
-                        Console.Write("\b \b");
-                    }
-                }
-                else
-                {
-                    pwd.Append(i.KeyChar);
-                    Console.Write("*");
-                }
-            }
-            return pwd.ToString();
-        }
     }
 }
